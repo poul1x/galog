@@ -19,6 +19,7 @@ from PyQt5.QtWidgets import (
 )
 
 from galog.app.components.capture_pane import CapturePane, RunAppAction
+from galog.app.components.device_select_pane.pane import DeviceSelectPane
 from galog.app.components.dialogs.stop_capture_dialog import (
     StopCaptureDialog,
     StopCaptureDialogResult,
@@ -174,6 +175,11 @@ class MainWindow(QMainWindow):
                         defaultWidget.setStyleSheet("width: 0px;")
 
     def startCapture(self):
+
+        self.deviceSelectPane = DeviceSelectPane(self)
+        self.deviceSelectPane.exec_()
+        return
+
         if self.logMessagesPaneController.isCaptureRunning():
             msgBrief = "Capture is running"
             msgVerbose = "Unable to start capture while another capture is running. Please, stop the running capture first"  # fmt: skip
